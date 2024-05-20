@@ -3,6 +3,8 @@ package com.webreview.webreviewapp.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -21,6 +23,8 @@ public class User {
     private String confirmPassword;
     @Column(name = "role")
     private String role;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Review> reviewList;
 
     public User(int id, String username, String email, String password, String confirmPassword, String role) {
         this.id = id;
@@ -88,5 +92,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<Review> getReviewList() {
+        return reviewList;
+    }
+
+    public void setReviewList(List<Review> reviewList) {
+        this.reviewList = reviewList;
     }
 }

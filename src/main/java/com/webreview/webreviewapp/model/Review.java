@@ -11,35 +11,34 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
     private int id;
-    @Column(name = "username")
-    private String username;
+    @Column(name = "title")
+    private String title;
     @Column(name = "content")
     private String content;
     @Column(name = "date")
     private LocalDateTime date;
     @Column(name = "score")
-    private Evaluation evaluation;
-    @Column(length = 64 )
-    private String images;
-
-    public Review(String username, String content, LocalDateTime date, Evaluation evaluation, String images) {
-        this.username = username;
-        this.content = content;
-        this.date = date;
-        this.evaluation = evaluation;
-        this.images = images;
-    }
+    private int rating;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Review() {
     }
 
-    public Review(int id, String username, String content, LocalDateTime date, Evaluation evaluation, String images) {
-        this.id = id;
-        this.username = username;
+    public Review(String title, String content, LocalDateTime date, int rating) {
+        this.title = title;
         this.content = content;
         this.date = date;
-        this.evaluation = evaluation;
-        this.images = images;
+        this.rating = rating;
+    }
+
+    public Review(int id, String title, String content, LocalDateTime date, int rating) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.date = date;
+        this.rating = rating;
     }
 
     public int getId() {
@@ -50,12 +49,12 @@ public class Review {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getTitle() {
+        return title;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
@@ -74,19 +73,19 @@ public class Review {
         this.date = date;
     }
 
-    public Evaluation getEvaluation() {
-        return evaluation;
+    public int getRating() {
+        return rating;
     }
 
-    public void setEvaluation(Evaluation evaluation) {
-        this.evaluation = evaluation;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
-    public String getImages() {
-        return images;
+    public User getUser() {
+        return user;
     }
 
-    public void setImages(String images) {
-        this.images = images;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

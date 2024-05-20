@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reviews List</title>
+</head>
+<body>
+    <h1>Reviews</h1>
+    <a th:href="@{/reviews/new}">Add New Review</a>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Rating</th>
+            <th>User</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="review : ${reviews}">
+            <td th:text="${review.title}"></td>
+            <td th:text="${review.content}"></td>
+            <td th:text="${review.rating}"></td>
+            <td th:text="${review.user != null ? review.user.username : 'N/A'}"></td>
+            <td>
+                <a th:href="@{/reviews/edit/{id}(id=${review.id})}">Edit</a>
+                <a th:href="@{/reviews/delete/{id}(id=${review.id})}">Delete</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

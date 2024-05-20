@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Review</title>
+</head>
+<body>
+<h1>New Review</h1>
+<form th:action="@{/reviews/saveReview}" th:object="${review}" method="post">
+    <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" th:field="*{title}">
+    </div>
+    <div>
+        <label for="content">Content:</label>
+        <textarea id="content" th:field="*{content}"></textarea>
+    </div>
+    <div>
+        <label for="rating">Rating:</label>
+        <input type="number" id="rating" th:field="*{rating}">
+    </div>
+    <div>
+        <label for="user">User:</label>
+        <select id="user" th:field="*{user}">
+            <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+        </select>
+    </div>
+    <div>
+        <button type="submit">Save</button>
+    </div>
+</form>
+</body>
+</html>
